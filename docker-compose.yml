@@ -1,0 +1,31 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .devcontainer
+      args: 
+        USERNAME: $USER
+    ports:
+      - "3000:3000"
+    environment:
+      - "DATABASE_HOST=db"
+      - "DATABASE_PORT=3306"
+      - "DATABASE_USER=root"
+      - "DATABASE_PASS=root"
+    links:
+      - db
+    volumes:
+      - $MAIN_APP_PATH:/app
+      - ~/.ssh:/home/$USER/.ssh:ro
+      - ~/.${USER_SHELL}_history:/home/$USER/.${USER_SHELL}_history
+      - usr_local_bundle:/usr/local/bundle
+    stdin_open: true
+  db:
+    image: mysql:5.7
+    volumes:
+      - sample_app_database:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+volumes:
+  usr_local_bundle:
+  sample_app_database:
