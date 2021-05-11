@@ -3,6 +3,5 @@
     "dockerComposeFile": "../docker-compose.yml",
     "service": "web",
     "workspaceFolder": "/app",
-    "shutdownAction": "stopCompose",
-    "remoteEnv": { "SHELL": "${localEnv:SHELL}" }
+    "shutdownAction": "stopCompose"
 }
